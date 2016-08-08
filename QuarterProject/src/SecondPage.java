@@ -1,3 +1,7 @@
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +12,7 @@
  *
  * @author MagloireRaphaelo
  */
-public class SecondPage extends javax.swing.JPanel {
+public class SecondPage extends javax.swing.JPanel  {
 
     /**
      * Creates new form SecondPage
@@ -16,7 +20,9 @@ public class SecondPage extends javax.swing.JPanel {
     public SecondPage() {
         initComponents();
     }
+    
 
+    public void close(){}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,37 +39,27 @@ public class SecondPage extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 51));
         jButton1.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 51));
         jButton1.setText("Play");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                Play(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 51));
         jButton2.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
         jButton2.setText("HIGHSCORES");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                HighScores(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(51, 0, 51));
         jButton3.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 0, 51));
         jButton3.setText("CREDITS");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                Credits(evt);
             }
         });
 
@@ -100,22 +96,41 @@ public class SecondPage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+    
+    
+    private void Play(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Play
+        // open play screen
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.dispose();
+        JFrame f = new JFrame("Hangman");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(new Play());
+        f.pack();
+        f.setVisible(true);
+    }//GEN-LAST:event_Play
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseClicked
+    private void HighScores(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HighScores
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.dispose();
+        JFrame f = new JFrame("Hangman");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(new HighScores());
+        f.pack();
+        f.setVisible(true);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_HighScores
+
+    private void Credits(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Credits
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        frame.dispose();
+        JFrame f = new JFrame("Hangman");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.add(new Credits());
+        f.pack();
+        f.setVisible(true);
+    }//GEN-LAST:event_Credits
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
