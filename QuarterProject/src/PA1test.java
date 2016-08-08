@@ -29,21 +29,8 @@ public class PA1test extends JFrame{
         gui.pack();
         gui.setLocationRelativeTo(null);
         gui.setVisible(true);
-        //gui.dispose();
         
-//        final JFrame splashScreen = new JFrame("Hangman");
-//        splashScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        
-//        ActionListener taskP = new ActionListener(){
-//          public void actionPerformed(ActionEvent e){
-//              
-//        splashScreen.add(new First_PageImage());
-//        splashScreen.pack();
-//        splashScreen.setVisible(true);
-//              splashScreen.dispose();
-//          }  
-//        };
-        // action to open the second page    
+        // closes current window and opens hangman game window
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -54,16 +41,14 @@ public class PA1test extends JFrame{
                 second.pack();
                 second.setLocationRelativeTo(null);
                 second.setVisible(true);
-               gui.dispose();
+                gui.dispose();
             }
-            
         }; 
         
         // set timer to perform action after 3 seconds
-        Timer timer = new Timer(3000 ,taskPerformer);
+        Timer timer = new Timer(1000 ,taskPerformer);
         timer.setRepeats(false);
         timer.start();
-        //gui.setVisible(false);
         
 
 

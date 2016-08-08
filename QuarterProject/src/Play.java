@@ -1,15 +1,12 @@
 
 //import javax.swing.JFrame;
 //import javax.swing.SwingUtilities;
-import java.awt.*;
-import java.text.*;
-import java.util.Date;
+
 import javax.swing.*;
-import javax.swing.event.*;
 import java.util.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -47,7 +44,6 @@ public class Play extends javax.swing.JPanel {
                 int min = cal.get(Calendar.MINUTE);
                 int seconds = cal.get(Calendar.SECOND);
                 String clock= month + "/" + day + "/" + year + " " + hour +":"+ min +":"+ seconds ;
-                //String clock= hour +":"+ min +":"+ seconds;
                 jLabel2.setText(clock);
             }
         };
@@ -60,8 +56,14 @@ public class Play extends javax.swing.JPanel {
         // randomly generate word to guess
         Random r = new Random();
         String randomWord = words[r.nextInt(words.length)];
-        word.setText(randomWord);
         
+        // displays blank spaces for word to be guessed
+        String display = "_";
+        for(int i=0; i<randomWord.length()-1; ++i)
+        {
+            display = display + ' ' + '_';
+        }
+        word.setText(display);
         
         
         
@@ -77,33 +79,33 @@ public class Play extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
+        skip = new javax.swing.JButton();
+        c = new javax.swing.JButton();
+        b = new javax.swing.JButton();
+        a = new javax.swing.JButton();
+        e = new javax.swing.JButton();
+        f = new javax.swing.JButton();
+        g = new javax.swing.JButton();
+        h = new javax.swing.JButton();
+        i = new javax.swing.JButton();
+        l = new javax.swing.JButton();
+        v = new javax.swing.JButton();
+        w = new javax.swing.JButton();
+        u = new javax.swing.JButton();
+        k = new javax.swing.JButton();
+        j = new javax.swing.JButton();
+        d = new javax.swing.JButton();
+        m = new javax.swing.JButton();
+        n = new javax.swing.JButton();
+        o = new javax.swing.JButton();
+        p = new javax.swing.JButton();
+        q = new javax.swing.JButton();
+        r = new javax.swing.JButton();
+        x = new javax.swing.JButton();
+        y = new javax.swing.JButton();
+        s = new javax.swing.JButton();
+        t = new javax.swing.JButton();
+        z = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Score = new javax.swing.JLabel();
         word = new javax.swing.JLabel();
@@ -115,185 +117,205 @@ public class Play extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("HANGMAN");
 
-        jButton1.setText("Skip");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        skip.setText("Skip");
+        skip.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Skip(evt);
             }
         });
-
-        jButton2.setText("C");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                C(evt);
+        skip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipActionPerformed(evt);
             }
         });
 
-        jButton3.setText("B");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        c.setText("C");
+        c.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                B(evt);
+                c(evt);
             }
         });
 
-        jButton4.setText("A");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        b.setText("B");
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                A(evt);
+                b(evt);
             }
         });
 
-        jButton5.setText("E");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        a.setText("A");
+        a.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                E(evt);
+                a(evt);
+            }
+        });
+        a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aActionPerformed(evt);
             }
         });
 
-        jButton6.setText("F");
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        e.setText("E");
+        e.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                F(evt);
+                e(evt);
             }
         });
 
-        jButton7.setText("G");
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+        f.setText("F");
+        f.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                G(evt);
+                f(evt);
             }
         });
 
-        jButton8.setText("H");
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        g.setText("G");
+        g.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                H(evt);
+                g(evt);
             }
         });
 
-        jButton9.setText("I");
-        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+        h.setText("H");
+        h.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                I(evt);
+                h(evt);
             }
         });
 
-        jButton10.setText("L");
-        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+        i.setText("I");
+        i.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                L(evt);
+                i(evt);
             }
         });
 
-        jButton11.setText("V");
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+        l.setText("L");
+        l.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                V(evt);
+                l(evt);
             }
         });
 
-        jButton12.setText("W");
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+        v.setText("V");
+        v.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                W(evt);
+                v(evt);
             }
         });
 
-        jButton13.setText("U");
-        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+        w.setText("W");
+        w.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                U(evt);
+                w(evt);
             }
         });
 
-        jButton14.setText("K");
-        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+        u.setText("U");
+        u.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                K(evt);
+                u(evt);
             }
         });
 
-        jButton15.setText("J");
-        jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+        k.setText("K");
+        k.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                J(evt);
+                k(evt);
             }
         });
 
-        jButton16.setText("D");
-        jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
+        j.setText("J");
+        j.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                D(evt);
+                j(evt);
             }
         });
 
-        jButton17.setText("M");
-
-        jButton18.setText("N");
-        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+        d.setText("D");
+        d.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                N(evt);
+                d(evt);
             }
         });
 
-        jButton19.setText("O");
-        jButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+        m.setText("M");
+        m.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                O(evt);
+                mMouseClicked(evt);
+            }
+        });
+        m.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                M(evt);
             }
         });
 
-        jButton20.setText("P");
-        jButton20.addMouseListener(new java.awt.event.MouseAdapter() {
+        n.setText("N");
+        n.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                P(evt);
+                n(evt);
             }
         });
 
-        jButton21.setText("Q");
-        jButton21.addMouseListener(new java.awt.event.MouseAdapter() {
+        o.setText("O");
+        o.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Q(evt);
+                o(evt);
             }
         });
 
-        jButton22.setText("R");
-        jButton22.addMouseListener(new java.awt.event.MouseAdapter() {
+        p.setText("P");
+        p.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                R(evt);
+                p(evt);
             }
         });
 
-        jButton23.setText("X");
-        jButton23.addMouseListener(new java.awt.event.MouseAdapter() {
+        q.setText("Q");
+        q.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                X(evt);
+                q(evt);
             }
         });
 
-        jButton24.setText("Y");
-        jButton24.addMouseListener(new java.awt.event.MouseAdapter() {
+        r.setText("R");
+        r.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Y(evt);
+                r(evt);
             }
         });
 
-        jButton25.setText("S");
-        jButton25.addMouseListener(new java.awt.event.MouseAdapter() {
+        x.setText("X");
+        x.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                S(evt);
+                x(evt);
             }
         });
 
-        jButton26.setText("T");
-        jButton26.addMouseListener(new java.awt.event.MouseAdapter() {
+        y.setText("Y");
+        y.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                T(evt);
+                y(evt);
             }
         });
 
-        jButton27.setText("Z");
-        jButton27.addMouseListener(new java.awt.event.MouseAdapter() {
+        s.setText("S");
+        s.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                s(evt);
+            }
+        });
+
+        t.setText("T");
+        t.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t(evt);
+            }
+        });
+
+        z.setText("Z");
+        z.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Z(evt);
             }
@@ -328,62 +350,62 @@ public class Play extends javax.swing.JPanel {
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton14)
+                                        .addComponent(k)
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(57, 57, 57)
-                                                .addComponent(jButton13)
+                                                .addComponent(u)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton11)
+                                                .addComponent(v)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton12)
+                                                .addComponent(w)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton23)
+                                                .addComponent(x)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton24)
+                                                .addComponent(y)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton27))
+                                                .addComponent(z))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton10)
+                                                .addComponent(l)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton17)
+                                                .addComponent(m)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton18)
+                                                .addComponent(n)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton19)
+                                                .addComponent(o)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton20)
+                                                .addComponent(p)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton21)
+                                                .addComponent(q)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton22)
+                                                .addComponent(r)
                                                 .addGap(10, 10, 10)
-                                                .addComponent(jButton25)
+                                                .addComponent(s)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jButton26))))
+                                                .addComponent(t))))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(word, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton4)
+                                            .addComponent(a)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton3)
+                                            .addComponent(b)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton2)
+                                            .addComponent(c)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton16)
+                                            .addComponent(d)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton5)
+                                            .addComponent(e)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton6)
+                                            .addComponent(f)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton7)
+                                            .addComponent(g)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton8)
+                                            .addComponent(h)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton9)
+                                            .addComponent(i)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jButton15)))))
+                                            .addComponent(j)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -391,7 +413,7 @@ public class Play extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(skip)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -407,47 +429,54 @@ public class Play extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Score, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(skip)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                 .addComponent(word, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton16)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton15))
+                    .addComponent(a)
+                    .addComponent(b)
+                    .addComponent(c)
+                    .addComponent(d)
+                    .addComponent(e)
+                    .addComponent(f)
+                    .addComponent(g)
+                    .addComponent(h)
+                    .addComponent(i)
+                    .addComponent(j))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton17)
-                    .addComponent(jButton18)
-                    .addComponent(jButton19)
-                    .addComponent(jButton20)
-                    .addComponent(jButton21)
-                    .addComponent(jButton22)
-                    .addComponent(jButton25)
-                    .addComponent(jButton14)
-                    .addComponent(jButton26))
+                    .addComponent(l)
+                    .addComponent(m)
+                    .addComponent(n)
+                    .addComponent(o)
+                    .addComponent(p)
+                    .addComponent(q)
+                    .addComponent(r)
+                    .addComponent(s)
+                    .addComponent(k)
+                    .addComponent(t))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12)
-                    .addComponent(jButton23)
-                    .addComponent(jButton24)
-                    .addComponent(jButton27))
+                    .addComponent(u)
+                    .addComponent(v)
+                    .addComponent(w)
+                    .addComponent(x)
+                    .addComponent(y)
+                    .addComponent(z))
                 .addContainerGap())
         );
 
         Score.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void checkWord(char c)
+    {
+        
+    }
+    
+    
     private void Skip(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Skip
         // TODO add your handling code here:
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -460,138 +489,288 @@ public class Play extends javax.swing.JPanel {
         f.setVisible(true);
     }//GEN-LAST:event_Skip
 
-    private void A(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_A
-        // TODO add your handling code here:
-    }//GEN-LAST:event_A
+    private void a(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a
+    a.addActionListener(new ActionListener() {
+     public void actionPerformed(ActionEvent ae) {
+        a.setEnabled(false);
+        //bA.setEnabled(true);
+     }
+   }
+ );
+       
+    }//GEN-LAST:event_a
 
-    private void B(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_B
+    private void b(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b
         // TODO add your handling code here:
-    }//GEN-LAST:event_B
+        b.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent be){
+                b.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_b
 
-    private void C(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C
+    private void c(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_c
         // TODO add your handling code here:
-    }//GEN-LAST:event_C
+         c.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ce){
+                c.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_c
 
-    private void D(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_D
+    private void d(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_d
         // TODO add your handling code here:
-    }//GEN-LAST:event_D
+         d.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent de){
+                d.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_d
 
-    private void E(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_E
+    private void e(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_e
         // TODO add your handling code here:
-    }//GEN-LAST:event_E
+         e.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ee){
+                e.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_e
 
-    private void F(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_F
+    private void f(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_f
         // TODO add your handling code here:
-    }//GEN-LAST:event_F
+         f.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent fe){
+                f.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_f
 
-    private void G(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_G
+    private void g(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g
         // TODO add your handling code here:
-    }//GEN-LAST:event_G
+         g.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ge){
+                g.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_g
 
-    private void H(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_H
+    private void h(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_h
         // TODO add your handling code here:
-    }//GEN-LAST:event_H
+         h.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent he){
+                h.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_h
 
-    private void I(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_I
+    private void i(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_i
         // TODO add your handling code here:
-    }//GEN-LAST:event_I
+         i.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ie){
+                i.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_i
 
-    private void J(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_J
+    private void j(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j
         // TODO add your handling code here:
-    }//GEN-LAST:event_J
+         j.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent je){
+                j.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_j
 
-    private void K(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_K
+    private void k(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_k
         // TODO add your handling code here:
-    }//GEN-LAST:event_K
+         k.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ke){
+                k.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_k
 
-    private void L(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_L
+    private void l(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l
         // TODO add your handling code here:
-    }//GEN-LAST:event_L
+         l.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent le){
+                l.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_l
 
-    private void N(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_N
+    private void n(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_n
         // TODO add your handling code here:
-    }//GEN-LAST:event_N
+         n.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ne){
+                n.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_n
 
-    private void O(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_O
+    private void o(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o
         // TODO add your handling code here:
-    }//GEN-LAST:event_O
+        o.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent oe){
+                o.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_o
 
-    private void P(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_P
+    private void p(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p
         // TODO add your handling code here:
-    }//GEN-LAST:event_P
+        p.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent pe){
+                p.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_p
 
-    private void Q(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Q
+    private void q(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_q
         // TODO add your handling code here:
-    }//GEN-LAST:event_Q
+        q.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent qe){
+                q.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_q
 
-    private void R(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_R
+    private void r(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r
         // TODO add your handling code here:
-    }//GEN-LAST:event_R
+        r.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent re){
+                r.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_r
 
-    private void S(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S
+    private void s(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_s
         // TODO add your handling code here:
-    }//GEN-LAST:event_S
+        s.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent se){
+                s.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_s
 
-    private void T(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T
+    private void t(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t
         // TODO add your handling code here:
-    }//GEN-LAST:event_T
+        t.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent te){
+                t.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_t
 
-    private void U(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_U
+    private void u(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_u
         // TODO add your handling code here:
-    }//GEN-LAST:event_U
+        u.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ue){
+                u.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_u
 
-    private void V(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_V
+    private void v(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_v
         // TODO add your handling code here:
-    }//GEN-LAST:event_V
+        v.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ve){
+                v.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_v
 
-    private void W(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_W
+    private void w(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_w
         // TODO add your handling code here:
-    }//GEN-LAST:event_W
+        w.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent we){
+                w.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_w
 
-    private void X(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_X
+    private void x(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_x
         // TODO add your handling code here:
-    }//GEN-LAST:event_X
+        x.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent xe){
+                x.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_x
 
-    private void Y(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Y
+    private void y(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_y
         // TODO add your handling code here:
-    }//GEN-LAST:event_Y
+        y.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ye){
+                y.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_y
 
     private void Z(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Z
         // TODO add your handling code here:
+        z.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ze){
+                z.setEnabled(false);
+            }
+        });
     }//GEN-LAST:event_Z
-    
+
+    private void aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_aActionPerformed
+
+    private void skipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_skipActionPerformed
+
+    private void mMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mMouseClicked
+
+    private void M(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M
+        // TODO add your handling code here:
+        m.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent me){
+                m.setEnabled(false);
+            }
+        });
+    }//GEN-LAST:event_M
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Score;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton a;
+    private javax.swing.JButton b;
+    private javax.swing.JButton c;
+    private javax.swing.JButton d;
+    private javax.swing.JButton e;
+    private javax.swing.JButton f;
+    private javax.swing.JButton g;
+    private javax.swing.JButton h;
+    private javax.swing.JButton i;
+    private javax.swing.JButton j;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton k;
+    private javax.swing.JButton l;
+    private javax.swing.JButton m;
+    private javax.swing.JButton n;
+    private javax.swing.JButton o;
+    private javax.swing.JButton p;
+    private javax.swing.JButton q;
+    private javax.swing.JButton r;
+    private javax.swing.JButton s;
+    private javax.swing.JButton skip;
+    private javax.swing.JButton t;
+    private javax.swing.JButton u;
+    private javax.swing.JButton v;
+    private javax.swing.JButton w;
     private javax.swing.JLabel word;
+    private javax.swing.JButton x;
+    private javax.swing.JButton y;
+    private javax.swing.JButton z;
     // End of variables declaration//GEN-END:variables
 }
