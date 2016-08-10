@@ -1,14 +1,16 @@
 
-//import javax.swing.JFrame;
-//import javax.swing.SwingUtilities;
-
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.imageio.ImageIO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,6 +24,24 @@ import java.util.GregorianCalendar;
  */
 public class Play extends javax.swing.JPanel {
 
+    // randomly generated word to be guessed
+    private String randomWord;
+    // the string displayed with current successful guesses and unguessed chars
+    private String displayWord = "_";
+    // a string containing only successfully guessed chars
+    private ArrayList<Character> correctChars = new ArrayList<>();
+    
+    private static int score;
+    
+    private javax.swing.Timer gameTimer;
+    boolean headDrawn = false;
+    boolean bodyDrawn = false;
+    boolean leftArm = false;
+    boolean rightArm= false;
+    boolean leftLeg = false;
+    boolean rightLeg= false;
+    
+    int live = 6; //number of tries the player has
     /**
      * Creates new form Play
      */
@@ -30,6 +50,9 @@ public class Play extends javax.swing.JPanel {
         String[] words = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
         
         initComponents();
+        
+        // initialize score to 100 at beginning of each play
+        score = 100;
        
         // Display Clock
         ActionListener taskPerformer = new ActionListener() {
@@ -45,25 +68,48 @@ public class Play extends javax.swing.JPanel {
                 int seconds = cal.get(Calendar.SECOND);
                 String clock= month + "/" + day + "/" + year + " " + hour +":"+ min +":"+ seconds ;
                 jLabel2.setText(clock);
+                
             }
         };
         
         // set timer to continuously update
-        javax.swing.Timer timer = new javax.swing.Timer(0,taskPerformer);
+        javax.swing.Timer timer = new javax.swing.Timer(0, taskPerformer);
         timer.setRepeats(true);
         timer.start();
         
         // randomly generate word to guess
         Random r = new Random();
-        String randomWord = words[r.nextInt(words.length)];
+        randomWord = words[r.nextInt(words.length)];
         
         // displays blank spaces for word to be guessed
-        String display = "_";
         for(int i=0; i<randomWord.length()-1; ++i)
         {
-            display = display + ' ' + '_';
+            displayWord = displayWord + ' ' + '_';
         }
-        word.setText(display);
+
+        // updates all display variables
+        updateDisplay();
+        
+        System.out.println(randomWord);
+        
+        // Game Loop
+        ActionListener gameLoop = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                //put the switch case here for the picture to update
+                
+                
+                // checks for end game scenarios
+                if( score <= 40 || didWin() )
+                {
+                    endGame();
+                }
+            }
+        };
+        // set timer to continuously update
+        gameTimer = new javax.swing.Timer(0, gameLoop);
+        gameTimer.setRepeats(true);
+        gameTimer.start();
         
         
         
@@ -111,6 +157,7 @@ public class Play extends javax.swing.JPanel {
         word = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Pristina", 3, 24)); // NOI18N
@@ -121,11 +168,6 @@ public class Play extends javax.swing.JPanel {
         skip.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Skip(evt);
-            }
-        });
-        skip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                skipActionPerformed(evt);
             }
         });
 
@@ -147,11 +189,6 @@ public class Play extends javax.swing.JPanel {
         a.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 a(evt);
-            }
-        });
-        a.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aActionPerformed(evt);
             }
         });
 
@@ -242,11 +279,6 @@ public class Play extends javax.swing.JPanel {
         m.setText("M");
         m.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mMouseClicked(evt);
-            }
-        });
-        m.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 M(evt);
             }
         });
@@ -469,277 +501,513 @@ public class Play extends javax.swing.JPanel {
 
         Score.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
-
     
-    private void checkWord(char c)
+    
+    // updates all display variables
+    private void updateDisplay()
     {
+        word.setText(displayWord);
+        Score.setText(String.valueOf(score));   
         
+        //probably set picture here
+    }
+    
+    // getter for End Screen
+    public static int getScore()
+    {
+        return score;
+    }
+    
+    // returns true if char in randomWord
+    private boolean checkWord(char c)
+    {
+        for(int i=0; i<randomWord.length(); ++i)
+        {
+            if(c == randomWord.charAt(i))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // updates display word with correctly guessed character
+    private void updateDisplayWord(char c)
+    {
+        for(int i=0; i<randomWord.length(); ++i)
+        {
+            if(randomWord.charAt(i) == c)
+            {
+                if( i==randomWord.length()-1 )
+                {
+                    displayWord = displayWord.substring(0,i*2) + c;
+                }else{
+                    displayWord = displayWord.substring(0,i*2) + c + " " + displayWord.substring((i+1)*2,displayWord.length());
+                }
+                
+                //also add correctly guessed characters to an array
+                correctChars.add(c);
+            }
+        } 
+    }
+    
+    // if parsed string length == randomWord length
+    private boolean didWin()
+    {
+        if(correctChars.size() == randomWord.length())
+        {
+            return true;
+        }
+        return false;
     }
     
     
-    private void Skip(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Skip
-        // TODO add your handling code here:
+    // method that ends game
+    private void endGame() {  
+        // close current screen and open end game screen
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
         JFrame f = new JFrame("Hangman");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(new HighScores());
+        f.add(new EndScreen());
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
+        
+        // stop game loop timer from continuously updating
+        gameTimer.stop();
+    }    
+    
+    
+    
+    private void Skip(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Skip
+        // set score to 0
+        score = 0;
     }//GEN-LAST:event_Skip
 
     private void a(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a
-    a.addActionListener(new ActionListener() {
-     public void actionPerformed(ActionEvent ae) {
+        // disables button after being pressed
         a.setEnabled(false);
-        //bA.setEnabled(true);
-     }
-   }
- );
+
+        // checks if letter in word
+        if ( checkWord('a') )
+        {
+            updateDisplayWord( 'a' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();        
        
     }//GEN-LAST:event_a
 
     private void b(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b
-        // TODO add your handling code here:
-        b.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent be){
-                b.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        b.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('b') )
+        {
+            updateDisplayWord( 'b' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_b
 
     private void c(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_c
-        // TODO add your handling code here:
-         c.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ce){
-                c.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        c.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('c') )
+        {
+            updateDisplayWord( 'c' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_c
 
     private void d(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_d
-        // TODO add your handling code here:
-         d.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent de){
-                d.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        d.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('d') )
+        {
+            updateDisplayWord( 'd' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_d
 
     private void e(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_e
-        // TODO add your handling code here:
-         e.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ee){
-                e.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        e.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('e') )
+        {
+            updateDisplayWord( 'e' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_e
 
     private void f(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_f
-        // TODO add your handling code here:
-         f.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent fe){
-                f.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        f.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('f') )
+        {
+            updateDisplayWord( 'f' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_f
 
     private void g(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g
-        // TODO add your handling code here:
-         g.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ge){
-                g.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        g.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('g') )
+        {
+            updateDisplayWord( 'g' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_g
 
     private void h(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_h
-        // TODO add your handling code here:
-         h.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent he){
-                h.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        h.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('h') )
+        {
+            updateDisplayWord( 'h' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_h
 
     private void i(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_i
-        // TODO add your handling code here:
-         i.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ie){
-                i.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        i.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('i') )
+        {
+            updateDisplayWord( 'i' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_i
 
     private void j(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j
-        // TODO add your handling code here:
-         j.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent je){
-                j.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        j.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('j') )
+        {
+            updateDisplayWord( 'j' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_j
 
     private void k(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_k
-        // TODO add your handling code here:
-         k.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ke){
-                k.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        k.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('k') )
+        {
+            updateDisplayWord( 'k' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_k
 
     private void l(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l
-        // TODO add your handling code here:
-         l.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent le){
-                l.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        l.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('l') )
+        {
+            updateDisplayWord( 'l' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_l
 
     private void n(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_n
-        // TODO add your handling code here:
-         n.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ne){
-                n.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        n.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('n') )
+        {
+            updateDisplayWord( 'n' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_n
 
     private void o(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o
-        // TODO add your handling code here:
-        o.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent oe){
-                o.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        o.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('o') )
+        {
+            updateDisplayWord( 'o' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_o
 
     private void p(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p
-        // TODO add your handling code here:
-        p.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent pe){
-                p.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        p.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('p') )
+        {
+            updateDisplayWord( 'p' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_p
 
     private void q(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_q
-        // TODO add your handling code here:
-        q.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent qe){
-                q.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        q.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('q') )
+        {
+            updateDisplayWord( 'q' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_q
 
     private void r(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r
-        // TODO add your handling code here:
-        r.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent re){
-                r.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        r.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('r') )
+        {
+            updateDisplayWord( 'r' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_r
 
     private void s(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_s
-        // TODO add your handling code here:
-        s.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent se){
-                s.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        s.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('s') )
+        {
+            updateDisplayWord( 's' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_s
 
     private void t(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t
-        // TODO add your handling code here:
-        t.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent te){
-                t.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        t.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('t') )
+        {
+            updateDisplayWord( 't' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_t
 
     private void u(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_u
-        // TODO add your handling code here:
-        u.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ue){
-                u.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        u.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('u') )
+        {
+            updateDisplayWord( 'u' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_u
 
     private void v(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_v
-        // TODO add your handling code here:
-        v.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ve){
-                v.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        v.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('v') )
+        {
+            updateDisplayWord( 'v' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_v
 
     private void w(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_w
-        // TODO add your handling code here:
-        w.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent we){
-                w.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        w.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('w') )
+        {
+            updateDisplayWord( 'w' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_w
 
     private void x(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_x
-        // TODO add your handling code here:
-        x.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent xe){
-                x.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        x.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('x') )
+        {
+            updateDisplayWord( 'x' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_x
 
     private void y(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_y
-        // TODO add your handling code here:
-        y.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ye){
-                y.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        y.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('y') )
+        {
+            updateDisplayWord( 'y' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_y
 
     private void Z(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Z
-        // TODO add your handling code here:
-        z.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ze){
-                z.setEnabled(false);
-            }
-        });
+        // disables button after being pressed
+        z.setEnabled(false);
+        
+        // checks if letter in word
+        if ( checkWord('z') )
+        {
+            updateDisplayWord( 'z' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
     }//GEN-LAST:event_Z
 
-    private void aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aActionPerformed
-        // TODO add your handling code here:
+    private void M(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_M
+        // disables button after being pressed
+        m.setEnabled(false);
         
-    }//GEN-LAST:event_aActionPerformed
-
-    private void skipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_skipActionPerformed
-
-    private void mMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mMouseClicked
-        // TODO add your handling code here:
+        // checks if letter in word
+        if ( checkWord('m') )
+        {
+            updateDisplayWord( 'm' );
+        }
+        else{
+            score -= 10;
+        }
+        // updates dispaly variables
+        updateDisplay();  
         
-    }//GEN-LAST:event_mMouseClicked
-
-    private void M(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M
-        // TODO add your handling code here:
-        m.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent me){
-                m.setEnabled(false);
-            }
-        });
     }//GEN-LAST:event_M
- 
-
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Score;
     private javax.swing.JButton a;
@@ -773,4 +1041,104 @@ public class Play extends javax.swing.JPanel {
     private javax.swing.JButton y;
     private javax.swing.JButton z;
     // End of variables declaration//GEN-END:variables
+
+     @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+         
+        Color color1 = Color.BLUE;
+        Color color2 = Color.BLUE;
+        g.setColor(color1);
+        
+        drawSet(g,color2);
+//        drawPole(g,color1);
+//        drawBase(g,color1);
+//        drawHeader(g,color1);
+        
+        switch (score) {
+            case 90:
+                drawHead(g, color2);
+            case 80:
+                drawBody(g, color2);
+            case 70:
+                drawLeftArm(g, color2);
+            case 60:
+                drawRightArm(g, color2);
+            case 50:
+                drawLeftLeg(g, color2);
+            case 40:
+                drawRightLeg(g, color2);
+         
+        }
+    }  
+    
+        private BufferedImage pic = null; 
+
+    private void drawSet(Graphics g, Color color2) {
+         try{
+                pic = ImageIO.read(new File("src\\first.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);
+                }
+
+    private void drawHead(Graphics g, Color color2) {
+       try{
+                pic = ImageIO.read(new File("src\\second.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);
+            updateDisplay();
+    }
+
+    private void drawBody(Graphics g, Color color2) {
+        try{
+                pic = ImageIO.read(new File("src\\third.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);    
+                        updateDisplay();
+
+    }
+
+    private void drawLeftArm(Graphics g, Color color2) {
+        try{
+                pic = ImageIO.read(new File("src\\fourth.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);    
+                        updateDisplay();
+
+    }
+
+    private void drawRightArm(Graphics g, Color color2) {
+        try{
+                pic = ImageIO.read(new File("src\\five.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);    
+                        updateDisplay();
+
+    }
+
+    private void drawLeftLeg(Graphics g, Color color2) {
+try{
+                pic = ImageIO.read(new File("src\\six.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);    
+                        updateDisplay();
+
+    }
+
+    private void drawRightLeg(Graphics g, Color color2) {
+        try{
+                pic = ImageIO.read(new File("src\\seven.png"));
+            }catch (IOException e){}
+            g.drawImage(pic, 250, 50, 180,180, this);    
+                updateDisplay();
+
+    }
+
+
+
 }
+
+
+
+
+
