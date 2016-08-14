@@ -48,7 +48,7 @@ public class Main extends JFrame{
         }; 
         
         // set timer to perform action after 3 seconds
-        Timer timer = new Timer(3000 ,taskPerformer);
+        Timer timer = new Timer(1000 ,taskPerformer);
         timer.setRepeats(false);
         timer.start();
         

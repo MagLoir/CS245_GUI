@@ -74,6 +74,7 @@ public class Play extends javax.swing.JPanel {
         // randomly generate word to guess
         Random r = new Random();
         randomWord = words[r.nextInt(words.length)];
+        System.out.println(randomWord);
         
         // displays blank spaces for word to be guessed
         for(int i=0; i<randomWord.length()-1; ++i)
@@ -143,7 +144,7 @@ public class Play extends javax.swing.JPanel {
                 // checks for end game scenarios
                 if( score <= 40  || didWin())
                 {
-                    secondGame();
+                    Color();
                 }
             }
         };
@@ -615,38 +616,22 @@ public class Play extends javax.swing.JPanel {
         return false;
     }
     
-    //method for the second game
-    private void secondGame(){
-      
+    
+    // method that ends game
+    private void Color() {
         // stop game loop timer from continuously updating
         gameTimer.stop();
         
         // close current screen and open end game screen
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
-        JFrame f = new JFrame("Color Game");
+        JFrame f = new JFrame("Color Gmae");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(new colorGame());
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
-    }
-    
-    // method that ends game
-//    private void endGame() {
-//        // stop game loop timer from continuously updating
-//        gameTimer.stop();
-//   
-//        // close current screen and open end game screen
-//        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//        frame.dispose();
-//        JFrame f = new JFrame("THE END?");
-//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        f.add(new EndScreen());
-//        f.pack();
-//        f.setLocationRelativeTo(null);
-//        f.setVisible(true);
-//    }    
+    }    
     
     
     // if skip button pressed...
