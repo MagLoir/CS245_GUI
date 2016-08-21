@@ -88,7 +88,7 @@ public class Soduku extends JPanel{
         panel.add(quit);
         panel.add(checkSolution);
         
-        quit.setBounds(10,300,130,30);
+        quit.setBounds(420,300,130,30);
         quit.addActionListener(new ActionListener(){
         
             public void actionPerformed(ActionEvent e){
@@ -124,7 +124,7 @@ public class Soduku extends JPanel{
         }
         
     });
-    checkSolution.setBounds(10,270,130,30);
+    checkSolution.setBounds(420,270,130,30);
     checkSolution.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -230,7 +230,7 @@ public class Soduku extends JPanel{
     }
 
     public void boardPainter(){
-        int x = 170; int y = 60;
+        int x = 100; int y = 60;
         int counter = 0;
         int[] presetInts = {8, 4, 6, 7, 4, 1, 6, 5, 5, 9, 3, 7, 8, 
                             7, 4, 8, 2, 1, 3, 5, 2, 9, 1, 3, 9, 2, 5};
@@ -241,7 +241,8 @@ public class Soduku extends JPanel{
             for(int j = 0; j < 9; j++){
                 if(counter == presetLoc[presetCounter]){
                     textFields[counter].setLocation(x, y);
-                    textFields[counter].setText(Integer.toString(presetInts[presetCounter]));
+                    textFields[counter].setText(Integer.toString(presetInts
+                            [presetCounter]));
                     textFields[counter].setEditable(false);
                     panel.add(textFields[counter]);
                     textFields[counter].setVisible(true);
@@ -257,7 +258,7 @@ public class Soduku extends JPanel{
                 }
             }
             y+=30;
-            x = 170;
+            x = 100;
         }
 
     }

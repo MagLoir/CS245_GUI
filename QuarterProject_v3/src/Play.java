@@ -213,6 +213,11 @@ public class Play extends javax.swing.JPanel {
                 Skip(evt);
             }
         });
+        skip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipActionPerformed(evt);
+            }
+        });
 
         c.setText("C");
         c.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -631,6 +636,7 @@ public class Play extends javax.swing.JPanel {
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
+        
     }    
     
     
@@ -638,10 +644,12 @@ public class Play extends javax.swing.JPanel {
     private void Skip(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Skip
         // set score to 0
         score = 0;
+        skip.setToolTipText("Skip");
     }//GEN-LAST:event_Skip
 
     private void a(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a
         // disables button after being pressed
+        a.setToolTipText("A");
         a.setEnabled(false);
 
         // checks if letter in word
@@ -659,6 +667,7 @@ public class Play extends javax.swing.JPanel {
 
     private void b(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b
         // disables button after being pressed
+        b.setToolTipText("B");
         b.setEnabled(false);
         
         // checks if letter in word
@@ -675,6 +684,7 @@ public class Play extends javax.swing.JPanel {
 
     private void c(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_c
         // disables button after being pressed
+        c.setToolTipText("C");
         c.setEnabled(false);
         
         // checks if letter in word
@@ -691,6 +701,7 @@ public class Play extends javax.swing.JPanel {
 
     private void d(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_d
         // disables button after being pressed
+        d.setToolTipText("D");
         d.setEnabled(false);
         
         // checks if letter in word
@@ -707,6 +718,7 @@ public class Play extends javax.swing.JPanel {
 
     private void e(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_e
         // disables button after being pressed
+        e.setToolTipText("E");
         e.setEnabled(false);
         
         // checks if letter in word
@@ -723,6 +735,7 @@ public class Play extends javax.swing.JPanel {
 
     private void f(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_f
         // disables button after being pressed
+        f.setToolTipText("F");
         f.setEnabled(false);
         
         // checks if letter in word
@@ -739,6 +752,7 @@ public class Play extends javax.swing.JPanel {
 
     private void g(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_g
         // disables button after being pressed
+        g.setToolTipText("G");
         g.setEnabled(false);
         
         // checks if letter in word
@@ -755,6 +769,7 @@ public class Play extends javax.swing.JPanel {
 
     private void h(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_h
         // disables button after being pressed
+        h.setToolTipText("H");
         h.setEnabled(false);
         
         // checks if letter in word
@@ -771,6 +786,7 @@ public class Play extends javax.swing.JPanel {
 
     private void i(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_i
         // disables button after being pressed
+        i.setToolTipText("I");
         i.setEnabled(false);
         
         // checks if letter in word
@@ -787,6 +803,7 @@ public class Play extends javax.swing.JPanel {
 
     private void j(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_j
         // disables button after being pressed
+        j.setToolTipText("J");
         j.setEnabled(false);
         
         // checks if letter in word
@@ -803,6 +820,7 @@ public class Play extends javax.swing.JPanel {
 
     private void k(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_k
         // disables button after being pressed
+        k.setToolTipText("K");
         k.setEnabled(false);
         
         // checks if letter in word
@@ -819,6 +837,7 @@ public class Play extends javax.swing.JPanel {
 
     private void l(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l
         // disables button after being pressed
+        l.setToolTipText("L");
         l.setEnabled(false);
         
         // checks if letter in word
@@ -835,6 +854,7 @@ public class Play extends javax.swing.JPanel {
 
     private void n(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_n
         // disables button after being pressed
+        n.setToolTipText("N");
         n.setEnabled(false);
         
         // checks if letter in word
@@ -851,6 +871,7 @@ public class Play extends javax.swing.JPanel {
 
     private void o(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_o
         // disables button after being pressed
+        o.setToolTipText("O");
         o.setEnabled(false);
         
         // checks if letter in word
@@ -867,6 +888,7 @@ public class Play extends javax.swing.JPanel {
 
     private void p(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p
         // disables button after being pressed
+        p.setToolTipText("P");
         p.setEnabled(false);
         
         // checks if letter in word
@@ -883,6 +905,7 @@ public class Play extends javax.swing.JPanel {
 
     private void q(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_q
         // disables button after being pressed
+        q.setToolTipText("Q");
         q.setEnabled(false);
         
         // checks if letter in word
@@ -899,6 +922,7 @@ public class Play extends javax.swing.JPanel {
 
     private void r(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r
         // disables button after being pressed
+        r.setToolTipText("R");
         r.setEnabled(false);
         
         // checks if letter in word
@@ -915,6 +939,7 @@ public class Play extends javax.swing.JPanel {
 
     private void s(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_s
         // disables button after being pressed
+        s.setToolTipText("S");
         s.setEnabled(false);
         
         // checks if letter in word
@@ -931,6 +956,7 @@ public class Play extends javax.swing.JPanel {
 
     private void t(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t
         // disables button after being pressed
+        t.setToolTipText("T");
         t.setEnabled(false);
         
         // checks if letter in word
@@ -947,6 +973,7 @@ public class Play extends javax.swing.JPanel {
 
     private void u(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_u
         // disables button after being pressed
+        u.setToolTipText("U");
         u.setEnabled(false);
         
         // checks if letter in word
@@ -963,6 +990,7 @@ public class Play extends javax.swing.JPanel {
 
     private void v(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_v
         // disables button after being pressed
+        v.setToolTipText("V");
         v.setEnabled(false);
         
         // checks if letter in word
@@ -979,6 +1007,7 @@ public class Play extends javax.swing.JPanel {
 
     private void w(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_w
         // disables button after being pressed
+        w.setToolTipText("W");
         w.setEnabled(false);
         
         // checks if letter in word
@@ -995,6 +1024,7 @@ public class Play extends javax.swing.JPanel {
 
     private void x(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_x
         // disables button after being pressed
+        x.setToolTipText("X");
         x.setEnabled(false);
         
         // checks if letter in word
@@ -1011,6 +1041,7 @@ public class Play extends javax.swing.JPanel {
 
     private void y(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_y
         // disables button after being pressed
+        y.setToolTipText("Y");
         y.setEnabled(false);
         
         // checks if letter in word
@@ -1027,6 +1058,7 @@ public class Play extends javax.swing.JPanel {
 
     private void Z(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Z
         // disables button after being pressed
+        z.setToolTipText("Z");
         z.setEnabled(false);
         
         // checks if letter in word
@@ -1043,6 +1075,7 @@ public class Play extends javax.swing.JPanel {
 
     private void M(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_M
         // disables button after being pressed
+        m.setToolTipText("M");
         m.setEnabled(false);
         
         // checks if letter in word
@@ -1057,6 +1090,11 @@ public class Play extends javax.swing.JPanel {
         updateDisplay();  
         
     }//GEN-LAST:event_M
+
+    private void skipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipActionPerformed
+        // TODO add your handling code here:
+        skip.setToolTipText("Click to skip the game");
+    }//GEN-LAST:event_skipActionPerformed
     
     
     

@@ -34,34 +34,49 @@ public class SecondPage extends javax.swing.JPanel  {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        play = new javax.swing.JButton();
+        Highscore = new javax.swing.JButton();
+        credits = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
-        jButton1.setText("Play");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        play.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
+        play.setText("Play");
+        play.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Play(evt);
+                play(evt);
+            }
+        });
+        play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
-        jButton2.setText("HIGHSCORES");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Highscore.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
+        Highscore.setText("HIGHSCORES");
+        Highscore.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HighScores(evt);
             }
         });
+        Highscore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HighscoreActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
-        jButton3.setText("CREDITS");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        credits.setFont(new java.awt.Font("Algerian", 2, 11)); // NOI18N
+        credits.setText("CREDITS");
+        credits.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Credits(evt);
+            }
+        });
+        credits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditsActionPerformed(evt);
             }
         });
 
@@ -76,20 +91,20 @@ public class SecondPage extends javax.swing.JPanel  {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Highscore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(play, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(credits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Highscore, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(credits, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -101,7 +116,7 @@ public class SecondPage extends javax.swing.JPanel  {
 
     
     
-    private void Play(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Play
+    private void play(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_play
         // Dispose of current screen and open play screen
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
@@ -111,7 +126,7 @@ public class SecondPage extends javax.swing.JPanel  {
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
-    }//GEN-LAST:event_Play
+    }//GEN-LAST:event_play
 
     private void HighScores(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HighScores
         // Dispose of current screen and open high scores page
@@ -138,11 +153,26 @@ public class SecondPage extends javax.swing.JPanel  {
         f.setVisible(true);
     }//GEN-LAST:event_Credits
 
+    private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+        // TODO add your handling code here:
+        play.setToolTipText("Play");
+    }//GEN-LAST:event_playActionPerformed
+
+    private void HighscoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HighscoreActionPerformed
+        // TODO add your handling code here:
+        Highscore.setToolTipText("HighScore");
+    }//GEN-LAST:event_HighscoreActionPerformed
+
+    private void creditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsActionPerformed
+        // TODO add your handling code here:
+        credits.setToolTipText("Credits");
+    }//GEN-LAST:event_creditsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Highscore;
+    private javax.swing.JButton credits;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton play;
     // End of variables declaration//GEN-END:variables
 }

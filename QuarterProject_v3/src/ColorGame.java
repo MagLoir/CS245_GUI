@@ -21,9 +21,12 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 public class ColorGame extends javax.swing.JPanel {
@@ -88,7 +91,7 @@ public class ColorGame extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent evt) {
                 
                 // checks for end game scenarios
-                if( round > 5 )
+                if( round > 1 )
                 {
                     try {
                         endGame();
@@ -106,7 +109,7 @@ public class ColorGame extends javax.swing.JPanel {
         // randomize word variable & color
         randomize();
         
-        
+       
     }
 
     /**
@@ -482,14 +485,9 @@ public class ColorGame extends javax.swing.JPanel {
         
         // close current screen and open end game screen
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//        frame.dispose();
-//        JFrame f = new JFrame("THE END?");
-//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        f.add(new EndScreen());
-//        f.pack();
-//        f.setLocationRelativeTo(null);
-//        f.setVisible(true);
-          Soduku start = new Soduku();
+        //frame.add(panel);
+       
+        Soduku start = new Soduku();
           start.run();
           frame.dispose();
     }    
