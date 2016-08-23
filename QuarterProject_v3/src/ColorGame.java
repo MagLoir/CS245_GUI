@@ -5,7 +5,7 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v2.0
-* date last modified: 8/15/2016
+* date last modified: 8/22/2016
 *
 * purpose: To Play Color Match Game
 *
@@ -41,8 +41,8 @@ public class ColorGame extends javax.swing.JPanel {
     private final JPanel[] panels = new JPanel[15];
     private final JButton[] buttons = new JButton[5];
     private final javax.swing.Timer gameTimer;
-    ArrayList<Integer> counts = new ArrayList<>();
     private final JPanel panel =new JPanel();
+    private int[][] buttonPos = new int[5][2];
 
     //create a panel for the soduku game
     static JPanel sodukuPanel;
@@ -85,13 +85,34 @@ public class ColorGame extends javax.swing.JPanel {
         timer.setRepeats(true);
         timer.start();
         
+        Clock.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
+        Clock.getActionMap().put("About",new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame,
+                    "Joseph Gunderson, Bronco # 010978760 \n Magloire Pungi, "
+                            + "Bronco # 009947405" +"\nQuarter Project "
+                            + "\nSummer 2016 ", "Info",
+                            JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        // this is what happens when you press escape
+        Clock.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"),"Escape");
+        Clock.getActionMap().put("Escape",new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
         // Game Loop
         ActionListener gameLoop = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 
                 // checks for end game scenarios
-                if( round > 1 )
+                if( round > 5 )
                 {
                     try {
                         endGame();
@@ -106,10 +127,12 @@ public class ColorGame extends javax.swing.JPanel {
         gameTimer.setRepeats(true);
         gameTimer.start();
         
-        // randomize word variable & color
+        // randomize word, word color & button location
         randomize();
         
-       
+       this.setLayout(null);
+       displayWord.setBounds(0, 0, 190, 43);
+       Clock.setBounds(400, 0, 190, 43);
     }
 
     /**
@@ -122,219 +145,18 @@ public class ColorGame extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        blueButton = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        greenButton = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        purpleButton = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        redButton = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
         Clock = new javax.swing.JLabel();
         displayWord = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
         yellowButton = new javax.swing.JButton();
+        blueButton = new javax.swing.JButton();
+        redButton = new javax.swing.JButton();
+        purpleButton = new javax.swing.JButton();
+        greenButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setMinimumSize(new java.awt.Dimension(600, 400));
         setName("gameColor"); // NOI18N
         setPreferredSize(new java.awt.Dimension(600, 400));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        blueButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blue.png"))); // NOI18N
-        blueButton.setName("blue"); // NOI18N
-        blueButton.setPreferredSize(new java.awt.Dimension(100, 100));
-        blueButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blueButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        greenButton.setBackground(new java.awt.Color(0, 0, 0));
-        greenButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green.png"))); // NOI18N
-        greenButton.setName("green"); // NOI18N
-        greenButton.setPreferredSize(new java.awt.Dimension(100, 100));
-        greenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                greenButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel7.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        purpleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/purple.png"))); // NOI18N
-        purpleButton.setName("purple"); // NOI18N
-        purpleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purpleButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(purpleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(purpleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
-        );
-
-        jPanel8.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        redButton.setBackground(new java.awt.Color(0, 0, 0));
-        redButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red.png"))); // NOI18N
-        redButton.setMaximumSize(new java.awt.Dimension(100, 100));
-        redButton.setMinimumSize(new java.awt.Dimension(100, 100));
-        redButton.setName("red"); // NOI18N
-        redButton.setPreferredSize(new java.awt.Dimension(100, 100));
-        redButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                redButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         Clock.setBackground(new java.awt.Color(153, 204, 255));
         Clock.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
@@ -348,30 +170,10 @@ public class ColorGame extends javax.swing.JPanel {
         displayWord.setText("COLOR");
         displayWord.setName("word"); // NOI18N
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         yellowButton.setBackground(new java.awt.Color(0, 0, 0));
         yellowButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/yellow.png"))); // NOI18N
+        yellowButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        yellowButton.setMinimumSize(new java.awt.Dimension(100, 100));
         yellowButton.setName("yellow"); // NOI18N
         yellowButton.setPreferredSize(new java.awt.Dimension(100, 100));
         yellowButton.addActionListener(new java.awt.event.ActionListener() {
@@ -380,117 +182,110 @@ public class ColorGame extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, Short.MAX_VALUE)
-        );
+        blueButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/blue.png"))); // NOI18N
+        blueButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        blueButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        blueButton.setName("blue"); // NOI18N
+        blueButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        blueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blueButtonActionPerformed(evt);
+            }
+        });
+
+        redButton.setBackground(new java.awt.Color(0, 0, 0));
+        redButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red.png"))); // NOI18N
+        redButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        redButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        redButton.setName("red"); // NOI18N
+        redButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        redButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redButtonActionPerformed(evt);
+            }
+        });
+
+        purpleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/purple.png"))); // NOI18N
+        purpleButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        purpleButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        purpleButton.setName("purple"); // NOI18N
+        purpleButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        purpleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purpleButtonActionPerformed(evt);
+            }
+        });
+
+        greenButton.setBackground(new java.awt.Color(0, 0, 0));
+        greenButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green.png"))); // NOI18N
+        greenButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        greenButton.setMinimumSize(new java.awt.Dimension(100, 100));
+        greenButton.setName("green"); // NOI18N
+        greenButton.setPreferredSize(new java.awt.Dimension(100, 100));
+        greenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                greenButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(displayWord, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Clock, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(11, 11, 11)))))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(purpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(redButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(displayWord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Clock, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(purpleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(yellowButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
+                                .addComponent(greenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(114, 114, 114)
+                                .addComponent(blueButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(68, Short.MAX_VALUE))))
         );
 
         getAccessibleContext().setAccessibleName("gameColor");
     }// </editor-fold>//GEN-END:initComponents
 
-    //method:endGame()
-    //purpose: method that ends game
-    private void endGame() throws IOException {
-        // stop game loop timer from continuously updating
-        gameTimer.stop();
-        
-        // close current screen and open end game screen
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        //frame.add(panel);
-       
-        Soduku start = new Soduku();
-          start.run();
-          frame.dispose();
-    }    
+    
+    
+    
     //method:greenButtonActionPerfomed(...)
     //purpose: get the action perfomed once the green button is clicked
     private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenButtonActionPerformed
@@ -501,16 +296,6 @@ public class ColorGame extends javax.swing.JPanel {
         randomize();
     }//GEN-LAST:event_greenButtonActionPerformed
 
-    //method:purpleButtonActionPerfomed(...)
-    //purpose: get the action perfomed once the purple button is clicked
-    private void purpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purpleButtonActionPerformed
-        round++;
-        if( "MAGENTA".equals(wordColor)){
-            score += 100;
-        }
-        randomize();
-    }//GEN-LAST:event_purpleButtonActionPerformed
-
     //method:blueButtonActionPerfomed(...)
     //purpose: get the action perfomed once the blue button is clicked
     private void blueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blueButtonActionPerformed
@@ -519,14 +304,13 @@ public class ColorGame extends javax.swing.JPanel {
             score += 100;
         }
         randomize();
-
     }//GEN-LAST:event_blueButtonActionPerformed
 
     //method:redButtonActionPerfomed(...)
     //purpose: get the action perfomed once the red button is clicked
     private void redButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redButtonActionPerformed
         round++;
-        if( "YELLOW".equals(wordColor)){
+        if( "RED".equals(wordColor)){
             score += 100;
         }
         randomize();
@@ -542,6 +326,37 @@ public class ColorGame extends javax.swing.JPanel {
         randomize();
     }//GEN-LAST:event_yellowButtonActionPerformed
 
+    //method:purpleButtonActionPerfomed(...)
+    //purpose: get the action perfomed once the purple button is clicked
+    private void purpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purpleButtonActionPerformed
+        round++;
+        if( "MAGENTA".equals(wordColor)){
+            score += 100;
+        }
+        randomize();
+    }//GEN-LAST:event_purpleButtonActionPerformed
+
+    //method:endGame()
+    //purpose: method that ends game
+    private void endGame() throws IOException {
+        // stop game loop timer from continuously updating
+        gameTimer.stop();
+        
+        // close current screen and open end game screen
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        //frame.add(panel);
+       
+        Soduku start = new Soduku();
+          start.run();
+          frame.dispose();
+          
+//        JFrame f = new JFrame("Sudoku");
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        f.add(new Soduku());
+//        f.pack();
+//        f.setLocationRelativeTo(null);
+//        f.setVisible(true);
+    }    
     //method: getScore()
     //purpose: method that retrieves score from outside java file
     public static int getScore()
@@ -580,69 +395,67 @@ public class ColorGame extends javax.swing.JPanel {
                break;
         }
         
-        // set all panels to invisible && reset tracker
-        counts.clear();
-        for(int j=0; j<panels.length; ++j)
-        {
-            panels[j].setOpaque(false); 
-        }
-
-       
-        // randomizes the button locations
-        for(int i=0; i<buttons.length; ++i)
-        {
-            int randIndex = r.nextInt(panels.length-2);
-            // ensure random panel pulled not duplicated
-            while(isIn(randIndex))
+        // min X = 0, max X = 600, minY = word.height(), maxY = 400 - 100
+        int randX = r.nextInt(600 - 100);
+        int randY = r.nextInt(300 - 43) + 43;
+        
+        // place first button
+        this.add(buttons[0]);
+        buttons[0].setBounds(randX,randY,100,100);
+        
+        // save cooridinates
+        buttonPos[0][0] = randX; buttonPos[0][1] = randY;
+        
+       // start placing buttons from next index
+       for( int i=1; i<buttons.length; ++i)
+       {
+            randX = r.nextInt(600 - 100);
+            randY = r.nextInt(300 - 43) + 43;
+            buttonPos[i][0] = randX; buttonPos[i][1] = randY;
+                    
+            // check against all buttons already placed
+            for( int j=i-1; j>=0; --j )
             {
-                randIndex = r.nextInt(panels.length-2);
+                // continue pulling numbers while collision with any button
+                while(collision(i,j))
+                {
+                    // if it has collided with another button after already clearing
+                    // a previous button -> recheck all other numbers
+                    if( j<i+1 )
+                    {
+                        j = i-1;
+                    }
+                    
+                    randX = r.nextInt(600 - 100);
+                    randY = r.nextInt(300 - 43) + 43;
+                    buttonPos[i][0] = randX; buttonPos[i][1] = randY;
+                }
             }
-            counts.add(randIndex);
             
-            // add button to randomly pulled jpanel location
-            panels[randIndex].add(buttons[i]);
-            panels[randIndex].setVisible(true);
-            buttons[i].setVisible(true);
-            
-            System.out.println(i+ "=" +randIndex);
-        }
-
+            // finally you can add the button
+            this.add(buttons[i]);
+            buttons[i].setBounds(randX,randY,100,100);
+       }
+       
     }
     
-    //method: isIn(int n)
-    //purpose: checks an ArrayList for a number
-    private Boolean isIn(int n)
-    {
-        // return false as soon as number detected
-        for(int i=0; i<counts.size(); ++i)
+    // checks for collision
+    private Boolean collision(int i, int j)
+    {   
+        // if they share the same x its okay, but same x & y means overlap
+        if( (Math.abs(buttonPos[i][0]-buttonPos[j][0]) < buttons[j].getWidth()+10) 
+                && (Math.abs(buttonPos[i][1]-buttonPos[j][1]) < buttons[j].getHeight()+10) )
         {
-            if(n == counts.get(i))
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
     
+    
     //method:fillArrays()
     //purpose: fills arays with respective panels and buttons
     private void fillArrays()
-    {
-        panels[0] = jPanel1;
-        panels[1] = jPanel2;
-        panels[2] = jPanel3;
-        panels[3] = jPanel4;
-        panels[4] = jPanel5;
-        panels[5] = jPanel6;
-        panels[6] = jPanel7;
-        panels[7] = jPanel8;
-        panels[8] = jPanel9;
-        panels[9] = jPanel10;
-        panels[10] = jPanel11;
-        panels[11] = jPanel12;
-        panels[12] = jPanel13;
-        panels[13] = jPanel14;
-        panels[14] = jPanel15;
+    {   
         buttons[0] = blueButton;
         buttons[1] = yellowButton;
         buttons[2] = purpleButton;
@@ -650,30 +463,15 @@ public class ColorGame extends javax.swing.JPanel {
         buttons[4] = redButton;
         
     }
-    
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Clock;
-    private static javax.swing.JButton blueButton;
+    private javax.swing.JButton blueButton;
     private static javax.swing.JLabel displayWord;
-    private static javax.swing.JButton greenButton;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private static javax.swing.JButton purpleButton;
-    private static javax.swing.JButton redButton;
-    private static javax.swing.JButton yellowButton;
+    private javax.swing.JButton greenButton;
+    private javax.swing.JButton purpleButton;
+    private javax.swing.JButton redButton;
+    private javax.swing.JButton yellowButton;
     // End of variables declaration//GEN-END:variables
 }

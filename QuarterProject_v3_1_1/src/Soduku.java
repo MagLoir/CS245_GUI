@@ -29,13 +29,13 @@ class Soduku extends JPanel {
     //main panel
     private JPanel panel;
     //panel of where the clock will be display
-    private JPanel clockPanel;
+    private  JPanel clockPanel;
     //panel where everything will be display
-    private JPanel mainPanel;
+    private  JPanel mainPanel;
     //submit button
-    private JButton submit;
+    private  JButton submit;
     //the quit button
-    private JButton quit;
+    private  JButton quit;
     //create frame name Soduku
     private JFrame frame = new JFrame("Soduku");
     //to keep the score
@@ -86,7 +86,7 @@ class Soduku extends JPanel {
     
     public void Soduku() {  
         // initialize all variables
-        score = ColorGame.getScore();
+        score = Couleur.getScore();
         fillAnswers();
         initVariables();
         
@@ -183,8 +183,6 @@ class Soduku extends JPanel {
          });
          
          paint();
-         
-         print(board);
     }
     
     
@@ -253,7 +251,7 @@ class Soduku extends JPanel {
     // if correct, navigate to End Screen
     // if incorrect, show which cells are wrong
     private void submit(java.awt.event.ActionEvent evt) {                      
-        
+
         evaluate();        
         incorrectCells();
         
@@ -478,7 +476,7 @@ class Soduku extends JPanel {
                 }
                 else{
                     tf[count].setLocation(x,y);
-                    //tf[count].setText("");
+                    //tf[count].setText(null);
                     panel.add(tf[count]);
                     tf[count].setVisible(true);
                     x+=30;

@@ -646,14 +646,12 @@ public class Play extends javax.swing.JPanel {
         
         // close current screen and open end game screen
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        // JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        Couleur start = new Couleur();
+        start.run();
         frame.dispose();
-        JFrame f = new JFrame("Color Game");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(new ColorGame());
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-        
+        frame.dispose();
+       
     }    
     
     
