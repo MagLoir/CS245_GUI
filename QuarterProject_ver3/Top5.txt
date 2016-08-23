@@ -1,5 +1,5 @@
 g 540
 XXX 540
+XXX 500
 XXX 470
 Fortune 440
-XXX 300

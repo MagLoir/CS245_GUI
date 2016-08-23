@@ -1,5 +1,9 @@
 
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 /***************************************************************
@@ -21,7 +25,27 @@ public class Credits extends javax.swing.JPanel {
      */
     public Credits() {
         initComponents();
-        
+        jLabel1.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
+        jLabel1.getActionMap().put("About",new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame,
+                    "Joseph Gunderson, Bronco # 010978760 \n Magloire Pungi, "
+                            + "Bronco # 009947405" +"\nQuarter Project "
+                            + "\nSummer 2016 ", "Info",
+                            JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        // this is what happens when you press escape
+        jLabel1.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"),"Escape");
+        jLabel1.getActionMap().put("Escape",new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        jButton1.setToolTipText("Back in main menu");
     }
 
     /**

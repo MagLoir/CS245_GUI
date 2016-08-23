@@ -52,6 +52,7 @@ public class Main extends JFrame{
         timer.setRepeats(false);
         timer.start();
         
+        Music.sound1.loop();
 
 
     }

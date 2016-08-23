@@ -51,7 +51,9 @@ public class Main extends JFrame{
         Timer timer = new Timer(1000 ,taskPerformer);
         timer.setRepeats(false);
         timer.start();
-        
+
+        Music.sound1.loop();
+
 
 
     }
