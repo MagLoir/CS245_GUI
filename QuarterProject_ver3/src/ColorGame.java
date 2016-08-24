@@ -4,18 +4,16 @@
 * author: Joseph Gunderson & Magloire Pungi
 * class: CS 245 – Programming Graphical User Interfaces
 *
-* assignment: Quarter Project v2.0
-* date last modified: 8/22/2016
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
 *
 * purpose: To Play Color Match Game
 *
 ****************************************************************/ 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -31,10 +29,10 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+
 public class ColorGame extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-
     private String display;
     private static int round;
     private static int score;
@@ -45,10 +43,6 @@ public class ColorGame extends javax.swing.JPanel {
     private final javax.swing.Timer gameTimer;
     private final JPanel panel =new JPanel();
     private int[][] buttonPos = new int[5][2];
-
-    //create a panel for the soduku game
-    static JPanel sodukuPanel;
-
      //make button to not have border
     Border emptyBorder = BorderFactory.createEmptyBorder();
     
@@ -58,10 +52,6 @@ public class ColorGame extends javax.swing.JPanel {
      */
     public ColorGame() {
         initComponents();
-        
-        sodukuPanel = new JPanel();
-        sodukuPanel.setPreferredSize(new Dimension(600,20));
-        
         fillArrays();
         
         // these variables need to get reinitialized with every new game
@@ -289,8 +279,6 @@ public class ColorGame extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
-    
     //method:greenButtonActionPerfomed(...)
     //purpose: get the action perfomed once the green button is clicked
     private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenButtonActionPerformed
@@ -321,7 +309,7 @@ public class ColorGame extends javax.swing.JPanel {
         randomize();
     }//GEN-LAST:event_redButtonActionPerformed
 
-   //method:yellowButtonActionPerfomed(...)
+    //method:yellowButtonActionPerfomed(...)
     //purpose: get the action perfomed once the yellow button is clicked
     private void yellowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yellowButtonActionPerformed
         round++;
@@ -347,20 +335,11 @@ public class ColorGame extends javax.swing.JPanel {
         // stop game loop timer from continuously updating
         gameTimer.stop();
         
-        // close current screen and open end game screen
+        // close current screen and open sudoku game
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        //frame.add(panel);
-       
+        frame.dispose();
         Soduku start = new Soduku();
-          start.run();
-          frame.dispose();
-          
-//        JFrame f = new JFrame("Sudoku");
-//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        f.add(new Soduku());
-//        f.pack();
-//        f.setLocationRelativeTo(null);
-//        f.setVisible(true);
+
     }    
     //method: getScore()
     //purpose: method that retrieves score from outside java file

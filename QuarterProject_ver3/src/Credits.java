@@ -1,3 +1,14 @@
+/***************************************************************
+* file: Credits.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: Displays bronco name & number of the authors
+*
+****************************************************************/ 
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -6,22 +17,11 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-/***************************************************************
-* file: Credits.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/10/2016
-*
-* purpose: Displays bronco name & number of the authors
-*
-****************************************************************/ 
-
 public class Credits extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Credits
+    /** 
+     * method: Credits()
+     * purpose: Creates new form Credits
      */
     public Credits() {
         initComponents();
@@ -126,8 +126,11 @@ public class Credits extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * method: Back()
+     * purpose: Dispose of current screen and open hangman main menu
+     */
     private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
-        // Dispose of current screen and open hangman main menu
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
         JFrame f = new JFrame("Main Menu");

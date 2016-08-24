@@ -3,8 +3,8 @@
 * author: Joseph Gunderson & Magloire Pungi
 * class: CS 245 – Programming Graphical User Interfaces
 *
-* assignment: Quarter Project v1.0
-* date last modified: 8/21/2016
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
 *
 * purpose: To Play Sudoku
 *
@@ -63,28 +63,13 @@ class Soduku extends JPanel {
     private int[] givenNumber={8,4,6,7,4,1,6,5,5,9,3,7,8,7,4,8,2,1,3,
                                       5,2,9,1,3,9,2,5};
 
-    
-    public void run() throws IOException{
+    /**
+     * method: Soduku()
+     * purpose: Creates new form NewJPanel
+     */    
+    public Soduku() throws IOException {  
         rec.setSize(30, 30);
-        Soduku();
-    }
-
-    private void initVariables()
-    {
-        sudokuScore = 540; // total possible points for sudoku
-        fillBoard();
-        // initializes boolean 2D array to false
-        for(Boolean[] row : wrongAnswer)
-        {
-            Arrays.fill(row, false);
-        }
         
-
-    }
-    
-
-    
-    public void Soduku() {  
         // initialize all variables
         score = ColorGame.getScore();
         fillAnswers();
@@ -184,11 +169,28 @@ class Soduku extends JPanel {
          
          paint();
          
-         print(board);
     }
     
+    /**
+     * method: initVariables()
+     * purpose: method that initializes variables that are reused
+     */
+    private void initVariables()
+    {
+        sudokuScore = 540; // total possible points for sudoku
+        fillBoard();
+        // initializes boolean 2D array to false
+        for(Boolean[] row : wrongAnswer)
+        {
+            Arrays.fill(row, false);
+        }
+    }
+        
     
-    // returns true if not a default index
+    /**
+     * method: notDefault
+     * purpose: returns true if not a default index
+     */
     private Boolean notDefault(int n)
     {
 
@@ -202,7 +204,10 @@ class Soduku extends JPanel {
         return true;
     }
     
-    // method that places red border around incorrect cells
+    /**
+     * method incorrectCells()
+     * purpose: method that places red border around incorrect cells
+     */
     private void incorrectCells()
     {
         for(int i=0; i<board.length; ++i)
@@ -231,7 +236,10 @@ class Soduku extends JPanel {
     }
     
     
-    // returns false if game board does not match answer key
+    /**
+     * method: notWin()
+     * purpose: returns false if game board does not match answer key
+     */
     private Boolean notWin()
     {
         for(int i=0; i<board.length; ++i)
@@ -248,10 +256,14 @@ class Soduku extends JPanel {
         return false;
     }
     
-    
-    // opens a dialog box with score {incorrect cells only calculated once)
-    // if correct, navigate to End Screen
-    // if incorrect, show which cells are wrong
+    /**
+     * method: submit
+     * purpose:opens a dialog box with score 
+     *          (incorrect cells only calculated once)
+     *          if correct, navigate to End Screen
+     *          if incorrect, show which cells are wrong
+     * @param evt 
+     */
     private void submit(java.awt.event.ActionEvent evt) {                      
         
         evaluate();        
@@ -277,7 +289,10 @@ class Soduku extends JPanel {
         }
     }  
     
-    // method that ends game
+    /**
+     * method: gameOver()
+     * purpose: method that ends game
+     */
     private void gameOver()
     {
         // add sudoku score to total score
@@ -297,18 +312,23 @@ class Soduku extends JPanel {
         
     }
     
-    
-    // disposes of main menu (current screen) and navigates to end page
+    /**
+     * method: quit()
+     * purpose: disposes of main menu (current screen) and navigates to end page
+     */
     private void quit(java.awt.event.ActionEvent evt) { 
         // evaluate sudoku score
         evaluate();
         // end game shtuff
         gameOver();
         
-    }  
-
+    } 
     
-    // method that calculates score of submitted sudoku board vs solution board
+    /**
+     * method: evaluate()
+     * purpose: method that calculates score of submitted 
+     *          sudoku board vs solution board
+     */
     private void evaluate()
     {   
         // get text from text field && fill current board
@@ -345,16 +365,20 @@ class Soduku extends JPanel {
         
     }
    
-    
-    //method: getScore()
-    //purpose: method that retrieves score from outside java file
+    /**
+     * method: getScore()
+     * purpose: method that retrieves score from outside java file
+     */
     public static int getScore()
     {
         return score;
     }
         
         
-    // method that initializes Sudoku 2D array with starting numbers
+    /**
+     * method: fillBoard()
+     * purpose: method that initializes Sudoku 2D array with starting numbers
+     */
     private void fillBoard()
     {
         try{
@@ -394,7 +418,10 @@ class Soduku extends JPanel {
         } 
     }
     
-    // method that fill 2D array with all sudoku answers
+    /**
+     * method: fillAnswers()
+     * purpose: method that fill 2D array with all sudoku answers
+     */
     private void fillAnswers()
     {
         try{
@@ -436,7 +463,10 @@ class Soduku extends JPanel {
         } 
     }
 
-    // displays the sudoku board
+    /**
+     * method: paint()
+     * purpose: displays the sudoku board
+     */
     private void paint() {
         
         //create the textfield which will only accept integers
@@ -445,8 +475,8 @@ class Soduku extends JPanel {
         tf = new JFormattedTextField[size];
         nf.setMaximumIntegerDigits(1);
         
-         //make a textfield that is tempory and then store it 
-            //in each index fot the original text field
+        //make a textfield that is tempory and then store it 
+        //in each index fot the original text field
         for(int i=0; i<size; i++){
             JFormattedTextField ftf= new JFormattedTextField(nf);
             ftf.setBounds(rec);
@@ -492,8 +522,12 @@ class Soduku extends JPanel {
         
     }
     
+    /** For next two methods are for troubleshooting **/
     
-    // method that generically prints 2D array
+    /**
+     * method: print
+     * purpose: method that generically prints 2D array
+     */
     private <T> void print(T[][] array)
     {
         for(T[] row : array)
@@ -507,7 +541,10 @@ class Soduku extends JPanel {
         System.out.println();
     }
     
-    // method that prints integer 2D array
+    /**
+     * method: print 
+     * purpose: method that prints integer 2D array
+     */
     private void print(int[][] array)
     {
         for(int[] row : array)

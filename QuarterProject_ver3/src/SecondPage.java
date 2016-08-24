@@ -1,4 +1,16 @@
 
+/***************************************************************
+* file: SecondPage.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: Hangman Main Menu aka Functions page
+*
+****************************************************************/ 
+
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -6,30 +18,22 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-/***************************************************************
-* file: SecondPage.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/20/2016
-*
-* purpose: Hangman Main Menu aka Functions page
-*
-****************************************************************/ 
 
 public class SecondPage extends javax.swing.JPanel  {
 
     /**
-     * Creates new form SecondPage
+     * method: SecondPage()
+     * purpose: Creates new form SecondPage
      */
     public SecondPage() {
         initComponents();
         
+        // tooltips for buttons
         play.setToolTipText("Play");
         Highscore.setToolTipText("HighScore");
         credits.setToolTipText("Credits");
         
+        // keyboard shortcuts
         jLabel1.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
         jLabel1.getActionMap().put("About",new AbstractAction() {
             @Override
@@ -128,7 +132,10 @@ public class SecondPage extends javax.swing.JPanel  {
 
 
     
-    // disposes of main menu (current screen) and opens hangman game
+    /**
+     * method: play()
+     * purpose: disposes of main menu (current screen) and opens hangman game
+     */
     private void play(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play
  
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -141,7 +148,10 @@ public class SecondPage extends javax.swing.JPanel  {
         f.setVisible(true);
     }//GEN-LAST:event_play
 
-    // disposes of main menu (current screen) and opens high scores screen
+    /**
+     * method: highScores()
+     * purpose: disposes of main menu (current screen) and opens high scores screen
+     */
     private void highScores(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highScores
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
@@ -153,7 +163,10 @@ public class SecondPage extends javax.swing.JPanel  {
         f.setVisible(true);
     }//GEN-LAST:event_highScores
 
-    // disposes of main menu (current screen) and opens credits screen
+    /**
+     * method: credits()
+     * purpose: disposes of main menu (current screen) and opens credits screen
+     */
     private void credits(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_credits
 
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);

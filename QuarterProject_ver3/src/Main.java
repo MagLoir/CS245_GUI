@@ -1,20 +1,20 @@
+/***************************************************************
+* file: Main.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: To run this GUI game
+*
+****************************************************************/ 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.Timer;
 
-/***************************************************************
-* file: Main.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/10/2016
-*
-* purpose: To run this GUI game
-*
-****************************************************************/ 
 
 public class Main extends JFrame{
 
@@ -48,10 +48,11 @@ public class Main extends JFrame{
         }; 
         
         // set timer to perform action after 3 seconds
-        Timer timer = new Timer(1000 ,taskPerformer);
+        Timer timer = new Timer(3000 ,taskPerformer);
         timer.setRepeats(false);
         timer.start();
         
+        // play music
         Music.sound1.loop();
 
 

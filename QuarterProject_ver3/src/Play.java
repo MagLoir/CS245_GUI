@@ -1,3 +1,14 @@
+/***************************************************************
+* file: Play.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: To Play Hangman
+*
+****************************************************************/ 
 
 import javax.swing.*;
 import java.util.*;
@@ -11,17 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-/***************************************************************
-* file: Play.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/20/2016
-*
-* purpose: To Play Hangman
-*
-****************************************************************/ 
 
 public class Play extends javax.swing.JPanel {
 
@@ -37,7 +37,8 @@ public class Play extends javax.swing.JPanel {
     private javax.swing.Timer gameTimer;
 
     /**
-     * Creates new form Play
+     * method: Play()
+     * purpose: Creates new form Play
      */
     public Play() {
         
@@ -45,6 +46,7 @@ public class Play extends javax.swing.JPanel {
         
         initComponents();
         
+        //tooltip && keyboard shortcuts
         skip.setToolTipText("Click to skip the game");
         skip.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
         skip.getActionMap().put("About",new AbstractAction() {
@@ -174,7 +176,6 @@ public class Play extends javax.swing.JPanel {
         gameTimer = new javax.swing.Timer(100, gameLoop);
         gameTimer.setRepeats(true);
         gameTimer.start();
-        
         
         
     }
@@ -580,20 +581,29 @@ public class Play extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    // updates all display variables
+    /**
+     * method: updateDisplay()
+     * purpose: updates all display variables
+     */
     private void updateDisplay()
     {
         word.setText(displayWord);
         Score.setText(String.valueOf(score));   
     }
     
-    // getter for End Screen
+    /**
+     * method:getScore()
+     * purpose: getter for End Screen
+     */
     public static int getScore()
     {
         return score;
     }
     
-    // returns true if char in randomWord
+    /**
+     * method: checkWord
+     * purpose: returns true if char in randomWord
+     */
     private boolean checkWord(char c)
     {
         for(int i=0; i<randomWord.length(); ++i)
@@ -606,7 +616,10 @@ public class Play extends javax.swing.JPanel {
         return false;
     }
     
-    // updates display word with correctly guessed character
+    /**
+     * method: udpateDisplayWord()
+     * purpose: updates display word with correctly guessed character
+     */
     private void updateDisplayWord(char c)
     {
         for(int i=0; i<randomWord.length(); ++i)
@@ -628,7 +641,10 @@ public class Play extends javax.swing.JPanel {
         } 
     }
     
-    // if parsed string length == randomWord length -> YOU WIN!
+    /**
+     * method:didWin()
+     * purpose: if parsed string length == randomWord length -> YOU WIN!
+     */
     private boolean didWin()
     {
         if(correctChars.size() == randomWord.length())
@@ -639,7 +655,10 @@ public class Play extends javax.swing.JPanel {
     }
     
     
-    // method that ends hangman and starts color game
+    /**
+     * purpose: colorGame()
+     * method: method that ends hangman and starts color game
+     */
     private void colorGame() {
         // stop game loop timer from continuously updating
         gameTimer.stop();
@@ -656,6 +675,10 @@ public class Play extends javax.swing.JPanel {
         
     }    
     
+    /**
+     * methods: letter of alphabet
+     * purpose: Below are the methods for the 26 alphabet character buttons 
+     */
     
     private void a(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a
         // disables button after being pressed
@@ -1100,15 +1123,16 @@ public class Play extends javax.swing.JPanel {
         updateDisplay();  
         
     }//GEN-LAST:event_M
-
-    // if skip pressed, you get no points!
+    //end of the alphabetic letter methods
+    
+    /**
+     * method: skip()
+     * purpose: if skip pressed, you get no points!
+     */
     private void skip(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skip
         score = 0;
     }//GEN-LAST:event_skip
-    
-    
-    
-    
+        
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

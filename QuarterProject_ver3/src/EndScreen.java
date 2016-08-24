@@ -1,3 +1,14 @@
+/***************************************************************
+* file: EndScreen.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: Display final score
+*
+****************************************************************/ 
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -11,21 +22,8 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-
-/***************************************************************
-* file: EndScreen.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/20/2016
-*
-* purpose: Display final score
-*
-****************************************************************/ 
 
 public class EndScreen extends javax.swing.JPanel {
 
@@ -38,6 +36,7 @@ public class EndScreen extends javax.swing.JPanel {
     // index to insert score at
     private int index;
     
+    // constructor
     public EndScreen() {
         initComponents();
         jPanel2.setVisible(false);
@@ -52,11 +51,14 @@ public class EndScreen extends javax.swing.JPanel {
         if( index >= 0 )
         {
             jLabel3.setText("Enter your initials:");
-            jPanel2.setVisible(true);       
+            jPanel2.setVisible(true);   
         }
+        
+        // tooltips
         enter.setToolTipText("Register name");
         jButton1.setToolTipText("End and return to main Menu");
         
+        // keyboard shortcut
         jLabel1.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
         jLabel1.getActionMap().put("About",new AbstractAction() {
             @Override
@@ -206,8 +208,10 @@ public class EndScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
-    // returns index if score qualifies, else returns -1 if unqualified
+    /**
+     * method: isHighScore()
+     * purpose: returns index if score qualifies, else returns -1 if unqualified
+    */
     private int isHighScore()
     {
         // if score is less than or equal to lowest score
@@ -239,7 +243,10 @@ public class EndScreen extends javax.swing.JPanel {
     }
     
     
-    // reads from a file and returns a 2D array
+    /**
+     * method: loadHighScores()
+     * purpose: reads from a file and returns a 2D array
+     */
     private ArrayList<ArrayList<String>> loadHighScores()
     {
         ArrayList<ArrayList<String>> highScores = new ArrayList<>();
@@ -268,7 +275,10 @@ public class EndScreen extends javax.swing.JPanel {
         return highScores;
     }
     
-    // updates array containing high scores
+    /**
+     * method: udpateHighScores()
+     * purpose: updates array containing high scores
+     */
     private void updateHighScores()
     {
         try{
@@ -300,16 +310,23 @@ public class EndScreen extends javax.swing.JPanel {
     }
     
     
-    // saves initials from TextField and then updates saved HighScores file
+    /**
+     * method: Enter()
+     * purpose: saves initials from TextField and then updates saved HighScores file
+     */
     private void Enter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enter
         winningName = jTextField1.getText();
+        winningName = winningName.substring(0, 3);
         enter.setEnabled(false);
         jTextField1.setEnabled(false);
         updateHighScores();
     }//GEN-LAST:event_Enter
 
     
-// Dispose of current screen and open function buttons screen
+    /**
+     * method: end()
+     * purpose: Dispose of current screen and open function buttons screen
+     */
     private void end(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_end
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();

@@ -1,12 +1,20 @@
+/***************************************************************
+* file: HighScores.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: Lists highest 5 scores
+*
+****************************************************************/ 
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -15,22 +23,12 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-/***************************************************************
-* file: HighScores.java
-* author: Joseph Gunderson & Magloire Pungi
-* class: CS 245 – Programming Graphical User Interfaces
-*
-* assignment: Quarter Project v1.0
-* date last modified: 8/11/2016
-*
-* purpose: Lists highest 5 scores
-*
-****************************************************************/ 
 
 public class HighScores extends javax.swing.JPanel {
 
     /**
-     * Creates new form HighScores
+     * method: HighScores()
+     * purpose: Creates new form HighScores
      */
     public HighScores() {
         
@@ -45,6 +43,7 @@ public class HighScores extends javax.swing.JPanel {
             displayHighScores(highScores);
         }
         
+        // keyboard shortcut
         jLabel1.getInputMap().put(KeyStroke.getKeyStroke("F1"),"About");
         jLabel1.getActionMap().put("About",new AbstractAction() {
             @Override
@@ -66,6 +65,7 @@ public class HighScores extends javax.swing.JPanel {
             }
         });
         
+        // tooltip
         jButton1.setToolTipText("Back to main Menu");
         
     }
@@ -286,7 +286,10 @@ public class HighScores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    // reads from a file and returns a 2D array
+    /**
+     * method: loadHighScores()
+     * purpose: reads from a file and returns a 2D array
+     */
     private ArrayList<ArrayList<String>> loadHighScores()
     {
         ArrayList<ArrayList<String>> highScores = new ArrayList<>();
@@ -325,7 +328,10 @@ public class HighScores extends javax.swing.JPanel {
     }
     
     
-    // Sets text of high scores into their appropriate JLabels
+    /**
+     * method: displayHighScore()
+     * purpose: Sets text of high scores into their appropriate JLabels
+     */
     private void displayHighScores(ArrayList<ArrayList<String>> aa)
     {
         firstPlace.setText(aa.get(0).get(0));
@@ -340,9 +346,11 @@ public class HighScores extends javax.swing.JPanel {
         fifthPlaceScore.setText(aa.get(4).get(1));
     }
     
-    
+    /**
+     * method: Back()
+     * purpose: Dispose of current screen and open hangman main menu
+     */
     private void Back(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back
-        // Dispose of current screen and open hangman main menu
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
         JFrame f = new JFrame("Main Menu");

@@ -1,19 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author MagloireRaphaelo
- */
+/***************************************************************
+* file: Clock.java
+* author: Joseph Gunderson & Magloire Pungi
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v1.2
+* date last modified: 8/23/2016
+*
+* purpose: Access the system's clock in Soduku class
+*
+****************************************************************/ 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.util.*;
 import java.util.Timer;
 import java.text.SimpleDateFormat;
+
 
 class Clock {
     final JLabel time = new JLabel();
